@@ -1,5 +1,5 @@
 async function fetchData() {
-    const response = await fetch('https://floating-headland-70705-e822ca18013b.herokuapp.com//get-crypto-data');
+    const response = await fetch('https://floating-headland-70705-e822ca18013b.herokuapp.com/get-crypto-data');
     if (!response.ok) {
         console.error('Failed to fetch:', response.statusText);
         return [];
