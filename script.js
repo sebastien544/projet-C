@@ -1,49 +1,22 @@
-// Define your API key
-const API_KEY = '45432204-ade1-4dcb-b9d7-250f3d83e63c';
-
-// Define a function to fetch data from the API
-async function fetchData(page) {
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    const apiUrl = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest`;
-    const url = proxyUrl + apiUrl;
-    const params = new URLSearchParams({
-        start: 1 + (page - 1) * 100,
-        limit: 100,
-        sort: 'market_cap',
-        cryptocurrency_type: 'all',
-        convert: 'USD'
-    });
-
-    const response = await fetch(`${url}?${params}`, {
-        headers: {
-            'X-CMC_PRO_API_KEY': API_KEY,
-        },
-    });
-
+async function fetchData() {
+    const response = await fetch('https://floating-headland-70705-e822ca18013b.herokuapp.com//get-crypto-data');
     if (!response.ok) {
         console.error('Failed to fetch:', response.statusText);
         return [];
     }
-
     const data = await response.json();
-    return data.data;
+    return data;  // Ensure you are returning the data here
 }
 
-// Fetch data from multiple pages
+
 async function getAllData() {
-    let allData = [];
-    for (let page = 1; page <= 5; page++) {
-        const data = await fetchData(page);
-        allData = allData.concat(data);
-    }
-    return allData;
+    return await fetchData();
 }
 
 // Define a function to process and sort the data
 function processAndSortData(data) {
     // Flatten, filter, and sort the data
     const processedData = data
-        .flat()
         .filter(coin => coin.cmc_rank <= 500)
         .filter(coin => coin.quote.USD.percent_change_7d >= 10)
         .filter(coin => coin.quote.USD.volume_24h >= (coin.quote.USD.market_cap * 0.10))
