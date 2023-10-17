@@ -19,6 +19,7 @@ async function fetchData(page) {
         headers: {
             'X-CMC_PRO_API_KEY': API_KEY,
         },
+        mode: 'no-cors',
     });
 
     if (!response.ok) {
