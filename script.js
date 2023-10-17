@@ -3,9 +3,10 @@ const API_KEY = '45432204-ade1-4dcb-b9d7-250f3d83e63c';
 
 // Define a function to fetch data from the API
 async function fetchData(page) {
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    const apiUrl = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest`;
-    const url = proxyUrl + apiUrl;
+    //const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    //const apiUrl = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest`;
+    //const url = proxyUrl + apiUrl;
+    const url = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest`;
     const params = new URLSearchParams({
         start: 1 + (page - 1) * 100,
         limit: 100,
